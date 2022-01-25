@@ -6,8 +6,11 @@ class UsersController extends AppControlelr
 
   public function register()
   {
-    $userData = $this->params['data']['user'];
-    $userData['invitationCode'] = $this->params['data']['invitationCode'];
+    $userData = [];
+    $userData['name'] = $this->params['data']['user']['name'] ?? null;
+    $userData['mailaddress'] = $this->params['data']['user']['mailaddress'] ?? null;
+    $userData['invitationCode'] = $this->params['data']['invitationCode'] ?? null;
+
     $mailMagazinOptedIn = $this->Session->read('mailMagazineOptedIn');
     if (isset($mailMagazinOptedIn)) {
       $userData['mailMagazineOptedIn'] = $mailMagazinOptedIn;
