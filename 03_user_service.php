@@ -24,9 +24,9 @@ class UserService extends AppService
       $this->invalidReasons[] = '名前が入力されていません。';
     }
 
-    if ($this->isBlank($userData['name'])) {
+    if ($this->isBlank($userData['mailaddress'])) {
       $this->invalidReasons[] = 'メールアドレスが入力されていません。';
-    } elseif ($this->isInvalidEmail($userData['name'])) {
+    } elseif ($this->isInvalidEmail($userData['mailaddress'])) {
       $this->invalidReasons[] = 'メールアドレスの形式が正しくありません。';
     }
 
