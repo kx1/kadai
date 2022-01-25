@@ -7,6 +7,8 @@ class UsersController extends AppControlelr
   public function register()
   {
     $userData = $this->params['data']['user'];
+    $userData['invitationCode'] = $this->params['data']['invitationCode'];
+
     $service = new UserService($this);
     $user = $service->register($userData);
 
