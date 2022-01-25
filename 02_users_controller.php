@@ -8,6 +8,11 @@ class UsersController extends AppControlelr
   {
     $userData = $this->params['data']['user'];
     $userData['invitationCode'] = $this->params['data']['invitationCode'];
+    $mailMagazinOptedIn = $this->Session->read('mailMagazineOptedIn');
+    if (isset($mailMagazinOptedIn)) {
+      $userData['mailMagazineOptedIn'] = $mailMagazinOptedIn;
+      $this->Session->delete('mailMagazineOptedIn');
+    }
 
     $service = new UserService($this);
 
@@ -17,11 +22,6 @@ class UsersController extends AppControlelr
       // TODO: 仕様未確定のため暫定
       throw $e;
     }
-
-    // 20211225 メルマガオプトアウトフラグを追加
-    $user['mailMagazineOptedIn'] = $this->Session->read('mailMagazineOptedIn');
-    $this->User->save($user);
-    $this->Session->delete('mailMagazineOptedIn');
 
     $this->set('registeredUser', $user);
   }
